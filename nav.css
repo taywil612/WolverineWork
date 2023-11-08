@@ -1,0 +1,35 @@
+.top-navbar {
+    background-color: #fffcfc;
+    color: #041e4e;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Nunito Sans';
+  }
+  
+  .home {
+    font-weight: bold;
+    color: #FFCB05 !important;
+    font-size: 20px;
+  }
+
+  .top-navbar a {
+    color: #041e4e;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.2s;
+    margin-right: 40px;
+  }
+  
+  .top-navbar a:hover {
+    opacity: 0.8;
+  }
+  
+  
