@@ -38,7 +38,7 @@
             <!--Might remove later-->
             <div class="forgot-password valign-text-middle">Forgot Password?</div>
 
-            <!--Switch to Regiser Page-->
+            <!--Switch to Register Page-->
             <p class="dont-have-an-account-sign-up-today valign-text-middle">Don't Have an Account? Sign Up Today!</p>
             
             <!--Logo-->
