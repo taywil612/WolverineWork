@@ -10,6 +10,7 @@
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,600|Inter:400|Nunito:400");
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,600|Alata:400"); 
 
 .screen a {
     display: contents;
@@ -61,7 +62,23 @@
     width: 20px;
   }
 
-
+  * {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0px;
+    height: 100%;
+  }
+  /* a blue color as a generic focus style */
+  button:focus-visible {
+    outline: 2px solid #4a90e2 !important;
+    outline: -webkit-focus-ring-color auto 5px !important;
+  }
+  a {
+    text-decoration: none;
+  }
 
 /* 
 ----------------------------------------------------------------------------------------
@@ -314,7 +331,7 @@ LOGIN PAGE CSS
     line-height: 18.2px;
     padding: 0;
     position: relative;
-    text-align: center;
+    text-align: left;
     top: 1px;
     width: 65px;
   }
@@ -350,7 +367,7 @@ LOGIN PAGE CSS
     line-height: 18.2px;
     padding: 0;
     position: relative;
-    text-align: center;
+    text-align: left;
     top: 1px;
     white-space: nowrap;
     width: 62px;
@@ -421,3 +438,371 @@ LOGIN PAGE CSS
 REGISTER PAGE CSS
 ----------------------------------------------------------------------------------------
 */
+.register-page {
+  align-items: flex-start;
+  background-color: var(--blue-whale);
+  display: flex;
+  height: 1024px;
+  min-width: 1440px;
+  padding: 112px 183px;
+}
+
+.register-page .overlap-group {
+  background-image: url(img/registerblock.svg);
+  background-size: 100% 100%;
+  height: 792px;
+  margin-top: 8px;
+  position: relative;
+  width: 1073px;
+}
+
+.register-page .password-icon {
+  height: 32px;
+  left: 437px;
+  object-fit: cover;
+  position: absolute;
+  top: 539px;
+  width: 30px;
+}
+
+.register-page .user-icon {
+  height: 31px;
+  left: 436px;
+  object-fit: cover;
+  position: absolute;
+  top: 466px;
+  width: 33px;
+}
+
+.register-page .user-icon-1 {
+  top: 320px;
+}
+
+.register-page .overlap-group2 {
+  align-items: flex-start;
+  background-image: url(img/logo-section.svg);
+  background-size: 100% 100%;
+  display: flex;
+  height: 784px;
+  justify-content: flex-end;
+  left: 3px;
+  min-width: 361px;
+  padding: 265.9px 19.0px;
+  position: absolute;
+  top: 0;
+}
+
+.register-page .placeholder-logo {
+ height: 313px;
+    left: 24px;
+    object-fit: cover;
+    position: absolute;
+    top: 235px;
+    width: 314px;
+}
+
+.register-page .flex-col {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  left: 453px;
+  min-height: 145px;
+  position: absolute;
+  top: 63px;
+  width: 525px;
+}
+
+.register-page .sign-up-today_-text {
+  -webkit-text-stroke: 1px var(--black);
+  color: var(--blue-whale);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  height: 84px;
+  letter-spacing: 0;
+  line-height: 52.0px;
+  text-align: center;
+  width: 525px;
+}
+
+.register-page .place {
+  -webkit-text-stroke: 1px #0000004c;
+  color: var(--pale-sky);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  height: 39px;
+  letter-spacing: 0;
+  line-height: 39.0px;
+  margin-left: 18.0px;
+  text-align: center;
+  width: 197px;
+}
+
+.register-page .account-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+  left: 551px;
+  min-height: 107px;
+  position: absolute;
+  top: 630px;
+  width: 349px;
+}
+
+.register-page .create-account-button {
+  align-items: center;
+  background-color: var(--blue-whale);
+  border: 1px solid;
+  border-color: var(--black);
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 14px;
+  position: relative;
+}
+
+.register-page .create-an-account {
+  color: var(--white);
+  font-family: var(--font-family-nunito_sans);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 23.4px;
+  margin-top: -1.00px;
+  position: relative;
+  text-align: center;
+  width: 321px;
+}
+
+.register-page .already-have-an-account-sign-in {
+  color: var(--pale-sky);
+  font-family: var(--font-family-alata-regular);
+  font-size: var(--font-size-xxs);
+  font-weight: 400;
+  height: 35px;
+  letter-spacing: 0;
+  line-height: 15.6px;
+  margin-left: 1.0px;
+  text-align: center;
+  width: 336px;
+}
+
+.register-page .overlap-group1 {
+  height: 372px;
+  left: 434px;
+  position: absolute;
+  top: 215px;
+  width: 551px;
+}
+
+.register-page .register-form {
+  align-items: flex-end;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  height: 372px;
+  left: 33px;
+  overflow: hidden;
+  padding: 7px 20.1px;
+  position: absolute;
+  top: 0;
+  width: 518px;
+}
+
+.register-page .first-name_-input {
+  align-items: flex-start;
+  border: 1px solid;
+  border-color: var(--pale-sky);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  margin-top: 16px;
+  padding: 14px;
+  position: relative;
+  width: 477px;
+}
+
+.register-page .first-name {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 2px;
+  position: relative;
+}
+
+.register-page .first-name-1 {
+  background-color: transparent;
+  border: 0;
+  flex: 0 0 auto;
+  letter-spacing: 0;
+  line-height: 18.2px;
+  margin-top: -1.00px;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.register-page .first-name-1::placeholder {
+  color: #696d8151;
+}
+
+.register-page ._-input {
+  align-items: flex-start;
+  border: 1px solid;
+  border-color: var(--pale-sky);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  padding: 14px;
+  position: relative;
+  width: 477px;
+}
+
+.register-page .frame-7 {
+  height: 22px;
+  position: relative;
+  width: 72px;
+}
+
+.register-page .last-name {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 10px;
+  padding: 2px;
+  position: relative;
+}
+
+.register-page .last-name-1 {
+  background-color: transparent;
+  border: 0;
+  flex: 0 0 auto;
+  letter-spacing: 0;
+  line-height: 18.2px;
+  margin-top: -1.00px;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.register-page .last-name-1::placeholder {
+  color: #696d8151;
+}
+
+.register-page .email-address_-input {
+  align-items: flex-start;
+  border: 1px solid;
+  border-color: var(--pale-sky);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  position: relative;
+  width: 477px;
+}
+
+.register-page .email_-address {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 2px;
+  position: relative;
+}
+
+.register-page .email-address {
+  background-color: transparent;
+  border: 0;
+  flex: 0 0 auto;
+  letter-spacing: 0;
+  line-height: 18.2px;
+  margin-top: -1.00px;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.register-page .email-address::placeholder {
+  color: #696d8151;
+}
+
+.register-page .username {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 2px;
+  position: relative;
+}
+
+.register-page .username-1 {
+  background-color: transparent;
+  border: 0;
+  flex: 0 0 auto;
+  letter-spacing: 0;
+  line-height: 18.2px;
+  margin-top: -1.00px;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.register-page .username-1::placeholder {
+  color: #696d8151;
+}
+
+.register-page .password {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.register-page .password-1 {
+  background-color: transparent;
+  border: 0;
+  height: 18px;
+  left: 2px;
+  letter-spacing: 0;
+  line-height: 18.2px;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  top: 1px;
+  white-space: nowrap;
+  width: 62px;
+}
+
+.register-page .password-1::placeholder {
+  color: #696d8151;
+}
+
+.register-page .email-_icon {
+  height: 23px;
+  left: 0;
+  position: absolute;
+  top: 180px;
+  width: 35px;
+}
+
+.register-page .user-icon-2 {
+  top: 247px;
+}
+
+.register-page .user-icon-3 {
+  height: 31px;
+  left: 434px;
+  object-fit: cover;
+  position: absolute;
+  width: 33px;
+}

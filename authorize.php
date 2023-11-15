@@ -22,24 +22,14 @@ exit('Please fill both the username and password fields!');
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
 
-//REPLACE "accounts" WITH TABLE NAME FROM WOLVERINE WORK DATABASE!!!!!!!!!
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+//REPLACE "account" WITH TABLE NAME FROM WOLVERINE WORK DATABASE!!!!!!!!!
+if ($stmt = $con->prepare('SELECT id, password FROM account WHERE username = ?')) {
 // Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
 $stmt->bind_param('s', $_POST['username']);
 $stmt->execute();
 // Store the result so we can check if the account exists in the database.
 $stmt->store_result();
 if ($stmt->num_rows > 0) {
-    /*put on register page
-    $stmt->bind_result($id, $email);
-    $stmt->fetch();
-    
-    $tld = substr($email, strlen($email)-2, 9);    // three last chars of the string
-    if ($tld = "umich.edu") {
-        // do stuff
-    }
-    */
-
     $stmt->bind_result($id, $password);
     $stmt->fetch();
     echo '$password';
