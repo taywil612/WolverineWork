@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// Check if logged in 
+// if (!isset($_SESSION['loggedin'])) {
+//     header("Location: ../login/login-form.php");
+//     exit();
+// }
+
 // Connect to the database
 include('../database/connection.php');
 
@@ -8,7 +15,7 @@ if ($_POST) {
     $title = $_POST['title'];
     $caption = $_POST['caption'];
     // Need session variable to complete
-    $username = 'username';
+    $username = $_SESSION['name'];
 
     // Prepared Statement to insert post info into the database
     $insert_post = "INSERT INTO post(username, title, caption) VALUES (?, ?, ?)";
@@ -51,7 +58,7 @@ if ($_POST) {
                 <textarea rows="8" name='caption' placeholder="Add a caption..."></textarea>
                 <br>
                 <div class="upload-container">
-                    <input type="file" class="custom-file-input" name="file-upload[]" id="file-upload" onchange="updateFileName(this)" required>
+                <input type="file" class="custom-file-input" name="file-upload[]" id="file-upload" onchange="updateFileName(this)" accept=".pdf, .docx" required>
                     <label for="file-upload" class="custom-file-label">
                         <span class="custom-file-label-text">Click to browse</span>
                         <span class="custom-file-label-text">.docx or .pdf</span>
