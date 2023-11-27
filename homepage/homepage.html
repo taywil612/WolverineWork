@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="homepage.css"> 
+    <body>
+        
+        <div class="side-bar"> 
+            <div class="title">Wolverine Work</div>
+
+            <div class="side-bar-buttons">
+                <button type = "submit" class="create-button" onclick="location.href='create'">Create a post</button>
+                <button type = "submit" class="search-button" onclick="location.href='search'">Search</button>
+                <button type = "submit" class="profile-button" onclick="location.href='profile'">Profile</button>
+                <button type = "submit" class="logout-button" onclick="location.href='logout'">Logout</button>
+            </div>
+        </div>
+
+        <div class= "post">
+            <div class= "profile">
+                <div class= "profile-img">
+                    <img id="profile-image-preview" src="placeholder.jpg" alt="Profile Picture">
+                </div>
+            </div>
+                <div class="profile-name">
+                    <p>username</p>
+                </div>
+
+            <div class="essayTitle">
+                <h2>Essay Title</h2>
+            </div>
+
+            <div class="essay">
+                <h3>Essay</h3>
+            </div>
+
+            <div class="like-button">&#x2665;</div>
+
+            <div class="previous-comments">
+                <h3>Old Comments</h3>
+            </div>
+            
+            <textarea id="comment" rows="3" placeholder="Add a comment..."></textarea>
+            
+            
+        </div>
+
+        <script>
+            const likeButtons = document.querySelectorAll(".like-button");
+            likeButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                button.classList.toggle("red");
+            });
+
+            const newComment = document.getElementById("newComment");
+        });
+
+        </script>
+      
+
+    </body>
+
+</html>
