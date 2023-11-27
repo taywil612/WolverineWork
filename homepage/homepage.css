@@ -102,6 +102,7 @@ body {
     width: 80%;
     margin-left:230px;
     margin-right: 50px;
+    height: 50%;
 }
 
 .profile-img{
@@ -125,7 +126,7 @@ body {
 
 .essay{
     width: 90%;
-    height: 40%;
+    height: 50%;
     background-color: #D3D3D3;
     text-align: center;
     border-radius: 10px;
@@ -149,33 +150,3 @@ body {
     color: red;
 }
 
-.previous-comments {
-    width: 90%;
-    height: 10%; 
-    background-color: #D3D3D3;
-    text-align: center;
-    border-radius: 10px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    margin:auto;
-}
-
-.new-comment{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    margin:auto;
-    margin-top:10px;
-}
-
-textarea{
-    border:none;
-    background: #D3D3D3;
-    padding:5px;
-    border-radius: 10px;
-    width:90%;
-    height: 5%;
-    margin-top: 20px;
-    margin-left: 55px;
-}
