@@ -45,6 +45,7 @@ if ($_POST) {
     <meta charset="utf-8">   
     <title>Submit Your Written Work</title>
     <link href='https://fonts.googleapis.com/css?family=Nunito+Sans' rel='stylesheet'>
+    <link rel="shortcut icon" type="image/png" href="../img/placeholderlogo.png" />
     <link href='../NavigationBar/nav.css' rel='stylesheet'>
     <link href='CaP.css' rel='stylesheet'>
 </head>

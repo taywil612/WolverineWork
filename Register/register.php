@@ -48,11 +48,6 @@ if (isset($_POST['reg-user'])) {
 	
 	
     if ($user) { // if user exists
-		/*
-		if ($user['username'] === $username) {
-		  array_push($errors, "Username already exists");
-		}
-	*/
 		if ($user['email'] === $emailInput) {
 		  array_push($errors, "email already exists");
 		}
@@ -98,8 +93,8 @@ if (isset($_POST['reg-user'])) {
                 $_SESSION['success'] = "You are now logged in and registered!";
             
                 //CHANGE TO HOME FILE
-                //header('Location: home-page.html');
-                echo 'homepage';
+                header('Location: ../homepage/homepage.html');
+                //echo 'homepage';
                 exit;
             }
         }  

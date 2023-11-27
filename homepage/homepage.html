@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="homepage.css"> 
+    <head>
+        <link rel="stylesheet" href="homepage.css"> 
+        <link rel="shortcut icon" type="image/png" href="../img/placeholderlogo.png" />
+    </head>
     <body>
         
         <div class="side-bar"> 
-            <div class="title">Wolverine Work</div>
+            <div class="title">&#9733; Wolverine Work</div>
 
             <div class="side-bar-buttons">
-                <button type = "submit" class="create-button" onclick="location.href='create'">Create a post</button>
+                <button type = "submit" class="create-button" onclick="location.href='../CreateAPost/CreateaPost.php'">Create a post</button>
                 <button type = "submit" class="search-button" onclick="location.href='search'">Search</button>
                 <button type = "submit" class="profile-button" onclick="location.href='profile'">Profile</button>
-                <button type = "submit" class="logout-button" onclick="location.href='logout'">Logout</button>
+                <button class="logout-button" href="../Login/login-page.html" onclick="return confirm('Are you sure you want to log out?')">
+                    <a type = "submit" onclick="location.href='../Login/login-page.html'">Logout</a>
+                </button>
+               
             </div>
         </div>
 
         <div class= "post">
             <div class= "profile">
                 <div class= "profile-img">
-                    <img id="profile-image-preview" src="placeholder.jpg" alt="Profile Picture">
+                    <img id="profile-image-preview" src="../img/avatarPic2.png" alt="Profile Picture">
                 </div>
             </div>
                 <div class="profile-name">

@@ -31,13 +31,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM account WHERE username = ?')
         $stmt->bind_result($id, $password);
         $stmt->fetch();
         $userInput = md5($_POST['password']);
-        //echo $userInput;
-        //echo $password;
-        
-        
-
         // Account exists, now we verify the password.
-        // Note: remember to use password_hash in your registration file to store the hashed passwords. (done)
         if ($userInput === $password) {
             // Verification success! User has logged-in!
             // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
@@ -48,8 +42,8 @@ if ($stmt = $con->prepare('SELECT id, password FROM account WHERE username = ?')
             $_SESSION['id'] = $id;
 
             //CHANGE NAME TO THAT OF THE HOMEPAGE IF DIFFERENT!!!!!!!!!!
-            //header('Location: ../home/home-page.html');
-            echo 'homepage';
+            header('Location: ../homepage/homepage.html');
+            //echo 'homepage';
             exit;
         } else {
             // Incorrect password
