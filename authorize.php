@@ -5,8 +5,8 @@ $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 
-//change to Wolverine work database!!!!
-$DATABASE_NAME = '';
+
+$DATABASE_NAME = 'wolverinework';
 
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
@@ -21,40 +21,44 @@ exit('Please fill both the username and password fields!');
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-
-//REPLACE "account" WITH TABLE NAME FROM WOLVERINE WORK DATABASE!!!!!!!!!
 if ($stmt = $con->prepare('SELECT id, password FROM account WHERE username = ?')) {
-// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
-$stmt->bind_param('s', $_POST['username']);
-$stmt->execute();
-// Store the result so we can check if the account exists in the database.
-$stmt->store_result();
-if ($stmt->num_rows > 0) {
-    $stmt->bind_result($id, $password);
-    $stmt->fetch();
-    echo '$password';
-    // Account exists, now we verify the password.
-    // Note: remember to use password_hash in your registration file to store the hashed passwords. (done)
-    if (password_verify($_POST['password'], $password)) {
-        // Verification success! User has logged-in!
-        // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
+    // Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
+    $stmt->bind_param('s', $_POST['username']);
+    $stmt->execute();
+    // Store the result so we can check if the account exists in the database.
+    $stmt->store_result();
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $password);
+        $stmt->fetch();
+        $userInput = md5($_POST['password']);
+        //echo $userInput;
+        //echo $password;
         
-        session_regenerate_id();
-        $_SESSION['loggedin'] = TRUE;
-        $_SESSION['name'] = $_POST['username'];
-        $_SESSION['id'] = $id;
+        
 
-        //CHANGE NAME TO THAT OF THE HOMEPAGE IF DIFFERENT!!!!!!!!!!
-        header('Location: ../home/home-page.html');
-        exit;
+        // Account exists, now we verify the password.
+        // Note: remember to use password_hash in your registration file to store the hashed passwords. (done)
+        if ($userInput === $password) {
+            // Verification success! User has logged-in!
+            // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
+            
+            session_regenerate_id();
+            $_SESSION['loggedin'] = TRUE;
+            $_SESSION['name'] = $_POST['username'];
+            $_SESSION['id'] = $id;
+
+            //CHANGE NAME TO THAT OF THE HOMEPAGE IF DIFFERENT!!!!!!!!!!
+            //header('Location: ../home/home-page.html');
+            echo 'homepage';
+            exit;
+        } else {
+            // Incorrect password
+            echo 'Incorrect password!';
+        }
     } else {
-        // Incorrect password
-        echo 'Incorrect password!';
+        // Incorrect username
+        echo 'Incorrect username!';
     }
-} else {
-    // Incorrect username
-    echo 'Incorrect username!';
-}
-$stmt->close();
+    $stmt->close();
 }
 ?>

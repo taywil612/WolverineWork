@@ -7,8 +7,8 @@ $DATABASE_EMAIL = '';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 
-//change to Wolverine work database!!!!
-$DATABASE_NAME = '';
+
+$DATABASE_NAME = 'wolverinework';
 $errors = array(); 
 
 
@@ -20,8 +20,9 @@ if (mysqli_connect_errno()) {
 }
 
 
+
 // REGISTER USER
-if (isset($_POST['reg_user'])) {
+if (isset($_POST['reg-user'])) {
 	// receive all input values from the registration form
     $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
 	$lastname = mysqli_real_escape_string($con, $_POST['lastname']);
@@ -58,46 +59,52 @@ if (isset($_POST['reg_user'])) {
         echo'Already have an account!'; //this works
     }
 
-    //verify if the inputted email ends with umich.edu
-    $stmt->bind_param('s', $_POST['email']);
-    $stmt->execute();
+    // Make sure we have input
+    // Remove extra white space if we do
+    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
 
-    // Store the result so we can check if the email is a university of michigan email.
-    $stmt->store_result();
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($email);
-        $stmt->fetch();
-        
-        $tld = substr($email, strlen($email)-2, 9);    // nine last chars of the string
-        if ($tld = "umich.edu") {
+    // List of allowed domains
+    $allowed = [
+        'umich.edu',
+    ];
 
-           // Finally, register user if there are no errors in the form
-	       if (count($errors) == 0) {
-            $passwordEncrypt = md5($password);//encrypt the password before saving in the database
+    // Make sure the email address is valid
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)){
 
-            $query = "INSERT INTO account (first_name, last_name, username, email, password) 
-                            VALUES('$firstname', '$lastname','$username', '$email', '$passwordEncrypt')";
-            mysqli_query($con, $query);
-            session_regenerate_id();
-            $_SESSION['loggedin'] = TRUE;
-            $_SESSION['name'] = $_POST['username'];
-            //$_SESSION['username'] = $username;
-            $_SESSION['success'] = "You are now logged in and registered!";
-        
-            //CHANGE TO HOME FILE
-            header('Location: home-page.html');
-            exit;
-            }
+        // Separate string by @ characters (there should be only one)
+        $parts = explode('@', $email);
 
+        // Remove and return the last part, which should be the domain
+        $domain = array_pop($parts);
+
+        // Check if the domain is in our list
+        if ( ! in_array($domain, $allowed))
+        {
+            // Not allowed
+            echo 'Did not input a correct University of Michigan email, try again!';
         }
+        else {
+            // Finally, register user if there are no errors in the form
+            if (count($errors) == 0) {
+                $passwordEncrypt = md5($password);//encrypt the password before saving in the database
 
-    } else{
-        echo 'Did not input a University of Michigan email, try again!';
-    }  
+                $query = "INSERT INTO account (first_name, last_name, username, email, password) 
+                                VALUES('$firstname', '$lastname','$username', '$email', '$passwordEncrypt')";
+                mysqli_query($con, $query);
+                session_regenerate_id();
+                $_SESSION['loggedin'] = TRUE;
+                $_SESSION['name'] = $_POST['username'];
+                //$_SESSION['username'] = $username;
+                $_SESSION['success'] = "You are now logged in and registered!";
+            
+                //CHANGE TO HOME FILE
+                //header('Location: home-page.html');
+                echo 'homepage';
+                exit;
+            }
+        }  
+    }
 
-    $stmt->close();
 
 }
-
-
 ?>
