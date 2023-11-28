@@ -1,4 +1,4 @@
-body {
+.c {
     background-color: #00274C;
     font-family: 'Nunito Sans';
     margin: 0;
@@ -7,14 +7,19 @@ body {
     justify-content: center;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #00274C;
+}
+
 h2 {
     text-align: center;
     font-size: 40px;
     color: #00274C;
 }
 
-.container {
-    margin-top: 60px;
+.content {
     background-color: white;
     padding: 20px;
     width: 75%;
@@ -55,7 +60,6 @@ input[type="text"], textarea {
     box-shadow: 1px 10px 5px 0px rgba(161,152,152,0.75);
     font-family: 'Nunito Sans';
     font-size: 12px;
-    
 }
 
 .custom-file-input {
@@ -92,7 +96,6 @@ input[type="text"], textarea {
 }
 
 .post-button {
-    background-color: navy;
     color: white;
     border: none;
     padding: 15px 30px;
@@ -108,3 +111,16 @@ input[type="text"], textarea {
 .post-button:hover {
     opacity: 0.8;
 }
+
+.menu {
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: #00274C;
+}
+
+.menu:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+

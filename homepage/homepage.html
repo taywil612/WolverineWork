@@ -3,50 +3,61 @@
     <head>
         <link rel="stylesheet" href="homepage.css"> 
         <link rel="shortcut icon" type="image/png" href="../img/placeholderlogo.png" />
+        <link href='https://fonts.googleapis.com/css?family=Nunito+Sans' rel='stylesheet'>
+        <link rel="shortcut icon" type="image/png" href="../img/placeholderlogo.png" />
+        <link href='../NavigationBar/side-nav-ss.css' rel='stylesheet'>
+        <style>
+            #mySidebar {
+                width: 0;
+            }
+    
+            .c {
+                margin-left: 0; /* Set initial margin to 0 */
+            }
+        </style>
     </head>
     <body>
+        <div id="mySidebar" class="sidebar">
+            <a class="x" href="javascript:void(0)" class="closebtn" onclick="closeFilter();">&times;</a>
+            <div class="side-bar"> 
+                <a class="title" href='../homepage/homepage.html'>&#9733; Wolverine Work</a>
         
-        <div class="side-bar"> 
-            <div class="title">&#9733; Wolverine Work</div>
-
-            <div class="side-bar-buttons">
-                <button type = "submit" class="create-button" onclick="location.href='../CreateAPost/CreateaPost.php'">Create a post</button>
-                <button type = "submit" class="search-button" onclick="location.href='search'">Search</button>
-                <button type = "submit" class="profile-button" onclick="location.href='profile'">Profile</button>
-                <button class="logout-button" href="../Login/login-page.html" onclick="return confirm('Are you sure you want to log out?')">
-                    <a type = "submit" onclick="location.href='../Login/login-page.html'">Logout</a>
-                </button>
-               
+                <div class="side-bar-buttons">
+                    <a class="nav" href='../CreateAPost/CreateaPost.php'>Create a post</a>
+                    <a class="nav" href='search'>Search</a>
+                    <a class="nav" href='profile'>Profile</a>
+                    <a class="nav" href="../Login/login-page.html" onclick="return confirm('Are you sure you want to log out?')">Log out</a>
+                </div>
             </div>
         </div>
-
-        <div class= "post">
-            <div class= "profile">
-                <div class= "profile-img">
-                    <img id="profile-image-preview" src="../img/avatarPic2.png" alt="Profile Picture">
+        <div class="c">
+            <div class="menu" onclick="openFilter()">&#9776;</div>
+            <div class= "post">
+                <div class= "profile">
+                    <div class= "profile-img">
+                        <img id="profile-image-preview" src="../img/avatarPic2.png" alt="Profile Picture">
+                    </div>
                 </div>
-            </div>
-                <div class="profile-name">
-                    <p>username</p>
+                    <div class="profile-name">
+                        <p>username</p>
+                    </div>
+
+                <div class="essayTitle">
+                    <h2>Essay Title</h2>
                 </div>
 
-            <div class="essayTitle">
-                <h2>Essay Title</h2>
-            </div>
+                <div class="essay">
+                    <h3>Essay</h3>
+                </div>
 
-            <div class="essay">
-                <h3>Essay</h3>
-            </div>
+                <div class="like-button">&#x2665;</div>
 
-            <div class="like-button">&#x2665;</div>
-
-            <div class="previous-comments">
-                <h3>Old Comments</h3>
+                <div class="previous-comments">
+                    <h3>Old Comments</h3>
+                </div>
+                
+                <textarea id="comment" rows="3" placeholder="Add a comment..."></textarea>               
             </div>
-            
-            <textarea id="comment" rows="3" placeholder="Add a comment..."></textarea>
-            
-            
         </div>
 
         <script>
@@ -57,8 +68,18 @@
             });
 
             const newComment = document.getElementById("newComment");
-        });
+            });
 
+            // JS functions to open and close the sidebar
+            function openFilter() {
+                document.getElementById("mySidebar").style.width = "300px";
+                document.getElementsByClassName("c")[0].style.marginLeft = "300px"; 
+            }
+
+            function closeFilter() {
+                document.getElementById("mySidebar").style.width = "0";
+                document.getElementsByClassName("c")[0].style.marginLeft = "0";
+            }
         </script>
       
 

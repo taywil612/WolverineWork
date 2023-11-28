@@ -1,4 +1,4 @@
-body {
+.c {
     background-color: #00274C;
     font-family: 'Nunito Sans';
     margin: 0;
@@ -7,33 +7,11 @@ body {
     justify-content: center;
 }
 
-.side-bar{
-
-    height: 100%;
-    width:160px;
-    position:fixed;
-    z-index:1;
-    top:0;
-    left:0;
-    background-color: #FFCB05;
-    text-align: center;
-    overflow-x:hidden;
-    padding-top:20px;
-    
+body {
+    margin: 0;
+    padding: 0;
 }
 
-.side-bar-buttons{
-    justify-content: center;
-    justify-content: space around;
-
-}
-
-.title{
-    margin: 10px;
-    font-weight: bold;
-    color: #00274C !important;
-    font-size: 15px;
-}
 
 .create-button{
     background-color: #FFCB05;
@@ -178,4 +156,17 @@ textarea{
     height: 5%;
     margin-top: 20px;
     margin-left: 55px;
+}
+
+.menu {
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFCB05;
+    padding: 20px;
+}
+
+.menu:hover {
+    opacity: 0.5;
+    cursor: pointer;
 }
