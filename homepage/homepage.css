@@ -80,6 +80,7 @@ body {
     width: 80%;
     margin-left:230px;
     margin-right: 50px;
+    height: 50%;
 }
 
 .profile-img{
@@ -103,7 +104,7 @@ body {
 
 .essay{
     width: 90%;
-    height: 40%;
+    height: 50%;
     background-color: #D3D3D3;
     text-align: center;
     border-radius: 10px;
