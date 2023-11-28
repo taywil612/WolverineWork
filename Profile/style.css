@@ -1,0 +1,217 @@
+        body {
+            background-color: #00274C;
+            font-family: 'Nunito Sans';
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            width: 75%;
+            height: 100%;
+            display: flex;
+        }
+
+        .profile-card {
+            width: 30%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #ccc;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .custom-file-label-text {
+            text-align: center;
+        }
+
+        .about-me {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .contacts {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .about-me textarea,
+        .contacts textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid gray;
+            border-radius: 10px;
+            box-sizing: border-box;
+            box-shadow: 1px 10px 5px 0px rgba(161, 152, 152, 0.75);
+            font-family: 'Nunito Sans';
+            font-size: 15px;
+        }
+
+        .posts {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .posts-title {
+            background-color: #FFCB05;
+            color: #00274C;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .posts-content {
+            flex-grow: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            overflow: auto;
+        }
+
+        .post {
+            width: calc(33.333% - 20px);
+            padding-bottom: calc(33.333% - 20px);
+            background-color: #ccc;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-actions {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .like-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .like-button,
+        .edit-button {
+            background-color: transparent;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: #00274C;
+        }
+
+        .like-button {
+            cursor: pointer;
+            font-size: 24px;
+            color: #00274C;
+        }
+        
+        .like-button.red {
+            color: red;
+        }
+        
+        .like-counter {
+            margin-left: 5px;
+            font-size: 16px; /* Adjust the font size as needed */
+            color: #00274C; /* Optional: Customize the color */
+        }
+
+        input[type="text"], textarea {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: white;
+            border: 1px solid gray;
+            border-radius: 10px;
+            box-sizing: border-box;
+            box-shadow: 1px 10px 5px 0px rgba(161, 152, 152, 0.75);
+            font-family: 'Nunito Sans';
+            font-size: 15px;
+        }
+
+        .custom-file-input {
+            display: none;
+        }
+
+        .custom-file-label {
+            width: 20%;
+            background-color: #ccc;
+            padding: 30px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            border-color: darkgray;
+            border-style: dashed;
+            cursor: pointer;
+            font-size: 15px;
+            font-family: 'Nunito Sans';
+        }
+
+        #uploaded-files {
+            text-align: right;
+            font-size: 15px;
+            margin-right: 50%;
+        }
+
+        .custom-file-label:hover {
+            opacity: 0.75;
+        }
+
+        .edited-name {
+            font-size: 25px; /* Adjust the font size as needed */
+            font-weight: bold; /* Optional: Add bold styling */
+            color: #00274C; /* Optional: Customize the color */
+        }
+
+        
+.name-editable {
+    font-size: 18px; /* Adjust the font size as needed */
+    color: inherit; /* Inherit color from the parent element (rest of the webpage) */
+}
+
