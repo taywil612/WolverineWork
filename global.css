@@ -11,6 +11,8 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,600|Inter:400|Nunito:400");
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,600|Alata:400"); 
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:700");
+
 
 .screen a {
     display: contents;
@@ -106,6 +108,7 @@ STYLEGUIDE CSS
     --font-family-inter: "Inter", Helvetica;
     --font-family-nunito: "Nunito", Helvetica;
     --font-family-nunito_sans: "Nunito Sans", Helvetica;
+    --font-family-nunito_sans-bold: "Nunito Sans-Bold";
   }
   .nunitosans-semi-bold-black-20px {
     color: var(--black);
@@ -146,6 +149,9 @@ STYLEGUIDE CSS
     font-style: normal;
     font-weight: 400;
   }
+
+
+
 
 
 /* 
@@ -247,7 +253,7 @@ LOGIN PAGE CSS
     font-family: var(--font-family-nunito_sans);
     font-size: var(--font-size-xs);
     font-weight: 400;
-    height: 13px;
+    height: 35px;
     left: 788px;
     letter-spacing: 0;
     line-height: 18.2px;
@@ -256,6 +262,11 @@ LOGIN PAGE CSS
     top: 460px;
     white-space: nowrap;
     width: 169px;
+  }
+
+ 
+  .login-page .dont-have-an-account-sign-up-today:hover {
+    color:#00274c;
   }
   
   .login-page .dont-have-an-account-sign-up-today {
@@ -272,7 +283,8 @@ LOGIN PAGE CSS
     top: 618px;
     width: 336px;
   }
-  
+
+
   /*Might remove later*/
   .login-page .remember-me-box {
     height: 20px;
@@ -592,6 +604,11 @@ REGISTER PAGE CSS
   width: 336px;
 }
 
+.register-page .already-have-an-account-sign-in:hover {
+  color:#00274c;
+}
+
+
 .register-page .overlap-group1 {
   height: 372px;
   left: 434px;
@@ -806,3 +823,4 @@ REGISTER PAGE CSS
   position: absolute;
   width: 33px;
 }
+

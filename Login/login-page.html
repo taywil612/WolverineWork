@@ -14,7 +14,7 @@
     
     <div class="container-center-horizontal">
         <!-- Login Form -->
-        <form class="login-page screen" id="loginform" name="loginform" action="authorize.php" method="post">
+        <form class="login-page" id="loginform" name="loginform" action="authorize.php" method="post">
             <div class="overlap-group overlap">
 
                 <div class="overlap-group1 overlap"> 
@@ -40,15 +40,34 @@
                     </label>
                     </div>
 
+                    <!--Had to put style code so hovers can work, something in the related css was blocking it-->
+                    <style>
+                        .forgot-password:hover {
+                            background-color: #00274c;
+                            color:#FFCB05;
+                        }
+
+                        .dont-have-an-account-sign-up-today:hover {
+                            background-color: #00274c;
+                            color:#FFCB05;
+                        }
+                    </style>
+
                     <!--Forgot Password Section-->
-                    <!--Might remove later-->
-                    <div class="forgot-password valign-text-middle">Forgot Password?</div>
+                    <!--Switch to  forgot password page-->
+                    <div class="forgot-password valign-text-middle" onclick="location.href='forgot-password.html'">Forgot Password?</div>
 
                     <!--Switch to Register Page-->
+                    
                     <p class="dont-have-an-account-sign-up-today valign-text-middle" onclick="location.href='../Register/register-page.html'">Don't Have an Account? Sign Up Today!</p>
                     
                     <!--Logo-->
-                    <img class="place-holder-logo" src="../img/placeholderlogo.png" alt="PlaceHolderLogo" />
+                    <p>
+                        <a href="../homepage/homepage.php">
+                         <img class="place-holder-logo" src="../img/placeholderlogo.png" alt="PlaceHolderLogo" >
+                        </a>
+                    </p>
+                   
                     
                     <!--Login Section-->
                     <div class="login-form-1">

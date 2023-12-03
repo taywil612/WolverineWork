@@ -3,7 +3,7 @@ session_start();
 
 // Check if logged in 
 if (!isset($_SESSION['loggedin'])) {
-    header("Location: ../login/login-form.php");
+    header("Location: ../homepage/error-page.html");
     exit();
 }
 

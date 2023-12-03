@@ -41,9 +41,8 @@ if ($stmt = $con->prepare('SELECT id, password FROM account WHERE username = ?')
             $_SESSION['name'] = $_POST['username'];
             $_SESSION['id'] = $id;
 
-            //CHANGE NAME TO THAT OF THE HOMEPAGE IF DIFFERENT!!!!!!!!!!
-            header('Location: ../homepage/homepage.html');
-            //echo 'homepage';
+            
+            header('Location: ../homepage/homepage.php');
             exit;
         } else {
             // Incorrect password

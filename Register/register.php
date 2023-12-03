@@ -93,7 +93,7 @@ if (isset($_POST['reg-user'])) {
                 $_SESSION['success'] = "You are now logged in and registered!";
             
                 //CHANGE TO HOME FILE
-                header('Location: ../homepage/homepage.html');
+                header('Location: ../homepage/homepage.php');
                 //echo 'homepage';
                 exit;
             }

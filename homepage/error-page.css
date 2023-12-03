@@ -1,0 +1,91 @@
+/* 
+----------------------------------------------------------------------------------------
+ERROR PAGE CSS
+----------------------------------------------------------------------------------------
+*/
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:700");
+.error-page {
+    align-items: center;
+    background-color: #00274c;
+    display: flex;
+    flex-direction:column;
+    gap: 42px;
+    min-height: 1024px;
+    padding: 323px 0;
+    width: 1440px;
+}
+
+.hidden,
+.hidden * {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.valign-text-middle {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    width: 684px;
+    height: 162px;
+    top: 0;
+    left: 0;
+    font-family: "Nunito Sans-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 40px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 52px;
+}
+
+.account-container {
+    height: 154px;
+    position: relative;
+    width: 400px;
+    margin: auto;
+}
+
+.sign-in-button:hover {
+    color: #ffcb05;
+}
+
+.sign-in-button {
+    color: #ffffff;
+    font-family: "Nunito Sans-bold", Helvetica;;
+    font-size: 20px;
+    cursor: pointer;
+    height: 98px;
+    left:0;
+    letter-spacing: 0;
+    line-height: 26px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    transform: all 0.2s ease;
+    width: 400px;
+}
+
+.register-button:hover {
+    color: #ffcb05;
+}
+
+.register-button {
+    color: #ffffff;
+    font-family: "Nunito Sans-bold", Helvetica;
+    font-size: 20px;
+    cursor: pointer;
+    height: 98px;
+    left:0;
+    letter-spacing: 0;
+    line-height: 26px;
+    position: absolute;
+    text-align: center;
+    top: 56px;
+    transform: all 0.2s ease;
+    width: 400px;
+}
+
