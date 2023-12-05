@@ -33,7 +33,7 @@ if ($_POST) {
     include '../includes/upload.php';
 
     // Redirect back to the homepage
-    header("Location: home");
+    header("Location: ../homepage/homepage.php");
     exit;
 }
 ?>
@@ -59,7 +59,7 @@ if ($_POST) {
     </style>
 </head>
 <body>
-    <?php include('../NavigationBar/side-nav.html'); ?>
+    <?php  include('../NavigationBar/side-nav.php'); ?> 
     <div class="c">
         <div class="content">
             <div class="menu" onclick="openFilter()">☰</div>

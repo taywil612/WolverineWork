@@ -127,17 +127,3 @@ body {
 .like-button.red {
     color: red;
 }
-
-
-.menu {
-    text-decoration: none;
-    font-size: 30px;
-    font-weight: bold;
-    color: #FFCB05;
-    padding: 20px;
-}
-
-.menu:hover {
-    opacity: 0.5;
-    cursor: pointer;
-}

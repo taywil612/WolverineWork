@@ -1,15 +1,5 @@
 <?php
 session_start();
-
-// Check if logged in, otherwise display sidebar for users not logged in/unregistered
-if (!isset($_SESSION['loggedin'])) {
-    include('../NavigationBar/side-nav-unreg.html');
-}
-
-if (isset($_SESSION['loggedin'])){
-    include('../NavigationBar/side-nav.html');
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +25,7 @@ if (isset($_SESSION['loggedin'])){
         </style>
     </head>
     <body>
-
+        <?php  include('../NavigationBar/side-nav.php'); ?> 
         <div class="c">
             <div class="menu" onclick="openFilter()">&#9776;</div>
             <div class= "post">
