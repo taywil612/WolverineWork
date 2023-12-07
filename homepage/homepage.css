@@ -5,69 +5,15 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 body {
     margin: 0;
     padding: 0;
+    background-color: #00274C;
 }
 
-
-.create-button{
-    background-color: #FFCB05;
-    color: #00274C;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: 'Nunito Sans';
-    background-color: #FFCB05;
-    margin-top: 200px;
-    font: bold;
-    
-}
-
-.search-button{
-    background-color: #FFCB05;
-    color: #00274C;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: 'Nunito Sans';
-    background-color: #FFCB05;
-    font: bold;
-}
-
-.profile-button{
-    background-color: #FFCB05;
-    color: #00274C;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: 'Nunito Sans';
-    background-color: #FFCB05;
-    font: bold;
-
-}
-
-.logout-button{
-    background-color: #FFCB05;
-    color: #00274C;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: 'Nunito Sans';
-    background-color: #FFCB05;
-    font: bold;
-
-}
 
 .post{
     background-color:white;
@@ -75,12 +21,12 @@ body {
     padding: 10px;
     border-radius: 10px;
     font-size: 16px;
-    margin-bottom: 15%;
+    margin-bottom: 3%;
     margin-top:3%;
     width: 80%;
     margin-left:100px;
     margin-right:100px;
-    height: 50%;
+    height: 60%;
 }
 
 .profile-img{
@@ -104,14 +50,15 @@ body {
 
 .essay{
     width: 90%;
-    height: 50%;
+    height: 40%;
     background-color: #D3D3D3;
-    text-align: center;
+    text-align: left;
     border-radius: 10px;
     justify-content: center;
     display: flex;
     align-items: center;
     margin: auto;
+    padding: 15px;
 }
 
 .like-button {
@@ -126,4 +73,66 @@ body {
 
 .like-button.red {
     color: red;
+}
+
+.menu {
+    margin-right: 80% !important;
+
+}
+
+.more-button {
+    color: #00274C;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 27px;
+    font-family: 'Nunito Sans';
+    background-color: #FFCB05;
+    width: 10%;
+    margin-bottom: 10%;
+    text-decoration: none;
+    text-align: center;
+}
+
+.more-button:hover {
+    opacity: 0.8;
+}
+
+.spacer {
+    padding: 0.5px;
+    width: 100%;
+}
+
+.file-preview  {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    font-family: 'Nunito Sans';
+    background-color: #FFCB05;
+    margin: 20px;
+    margin-left: 60px;
+    width: 22%;
+}
+
+.file-preview a {
+    color: #00274C;
+    text-decoration: none;
+}
+
+.file-preview:hover {
+    opacity: 0.8;
+}
+
+
+.profile-name a{
+    color: #00274C;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.profile-name:hover {
+    opacity: 0.8;
 }

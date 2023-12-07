@@ -1,10 +1,7 @@
 <?php
     session_start();
-    // Check if logged in 
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../homepage/error-page.html");
-        exit();
-    }
+
+    $username = isset($_GET['username']) ? $_GET['username'] : '';
 
 
 ?>

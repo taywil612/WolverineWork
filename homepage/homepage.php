@@ -1,5 +1,45 @@
 <?php
-session_start();
+    session_start();
+
+        // Connect to the database
+        include('../database/connection.php');
+
+        // Function to fetch recent posts
+        function getRecentPosts($offset, $limit) {
+            global $conn;
+            $query = "SELECT post_id, username, title, caption, created_at FROM post ORDER BY created_at DESC LIMIT $offset, $limit";
+            $result = mysqli_query($conn, $query);
+
+            $posts = array();
+            while ($row = mysqli_fetch_assoc($result)) {
+                $posts[] = $row;
+            }
+
+            return $posts;
+        }
+
+        // Function to fetch file preview by post_id
+        function getFilePreview($post_id) {
+            global $conn;
+            $query = "SELECT file_name FROM files WHERE post_id = $post_id LIMIT 1";
+            $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+
+            return isset($row['file_name']) ? $row['file_name'] : null;
+        }
+
+        // Define the number of posts to display on each page
+        $postsPerPage = 3;
+
+        // Get the page number from the URL parameter
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+        // Calculate the offset for the SQL query
+        $offset = ($page - 1) * $postsPerPage;
+
+        // Fetch recent posts
+        $recentPosts = getRecentPosts($offset, $postsPerPage);
+
 ?>
 
 <!DOCTYPE html>
@@ -16,50 +56,66 @@ session_start();
         
         <style>
             #mySidebar {
-                width: 0;
+                width: 300px;
             }
     
             .c {
-                margin-left: 0; /* Set initial margin to 0 */
+                margin-left: 300px; /* Set initial margin to 0 */
             }
         </style>
     </head>
     <body>
         <?php  include('../NavigationBar/side-nav.php'); ?> 
         <div class="c">
-            <div class="menu" onclick="openFilter()">&#9776;</div>
-            <div class= "post">
+        <!-- Button to open menu -->
+        <div class="menu" onclick="openFilter()">&#9776;</div>
+        <!-- Loop through recent posts -->
+        <?php foreach ($recentPosts as $post) : ?>
+            <div class="post">
+                <!-- Display post details -->
                 <div class= "profile">
                     <div class= "profile-img">
                         <img id="profile-image-preview" src="../img/avatarPic2.png" alt="Profile Picture">
                     </div>
                 </div>
-                    <div class="profile-name">
-                        <p>username</p>
-                    </div>
 
+                <div class="profile-name">
+                    <a href="../Profile/Profile.php?username=<?= $post['username'] ?>">
+                        <p><?= $post['username'] ?></p>
+                    </a>
+                </div>
+                
                 <div class="essayTitle">
-                    <h2>Essay Title</h2>
+                    <h2><?= $post['title'] ?></h2>
                 </div>
-
                 <div class="essay">
-                    <h3>Essay</h3>
+                    <h3><?= $post['caption'] ?></h3>
                 </div>
 
-                <div class="like-button">&#x2665; 5</div>             
+                <!-- Display file preview -->
+                <?php $filePreview = getFilePreview($post['post_id']); ?>
+                <?php if ($filePreview) : ?>
+                    <div class="file-preview">
+                        <a href="../uploads/<?= $filePreview ?>" target="_blank">Click here to read the document!</a>
+                    </div>
+                <?php endif; ?>
+
+                <div class="like-button">&#x2665; 5</div>
             </div>
-           
-            
+        <?php endforeach; ?>
+
+        <!-- "See More" button -->
+        <a href="?page=<?= $page + 1 ?>" class="more-button">See More</a>
+        <div class="spacer"> </div>
         </div>
 
         <script>
             const likeButtons = document.querySelectorAll(".like-button");
             likeButtons.forEach(button => {
-            button.addEventListener("click", function () {
-                button.classList.toggle("red");
-            });
+                button.addEventListener("click", function () {
+                    button.classList.toggle("red");
+                });
 
-            const newComment = document.getElementById("newComment");
             });
 
             // JS functions to open and close the sidebar

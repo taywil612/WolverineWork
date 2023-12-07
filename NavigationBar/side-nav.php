@@ -13,13 +13,13 @@
                 // Check if the user logged in
                 if (isset($_SESSION['loggedin'])) {
                     echo "<a class='nav' href='../CreateAPost/CreateaPost.php'>Create a Post</a>";
-                    echo "<a class='nav' href='../Profile/Profile.php'>View Profile</a>";
+                    echo "<a class='nav' href='../Profile/Profile.php?username=" . $_SESSION['name'] . "'>View Profile</a>";
                     echo '<a class="nav" onclick="return confirm(\'Are you sure you want to log out?\')" href="../Login/logout.php">Log out</a>';
 
                 }
                 else {
                     echo "<a class='nav' href='../Login/login-page.html'>Log In</a>";
-                    echo "<a class='nav' href='../Register/register.php'>Register</a>";
+                    echo "<a class='nav' href='../Register/register-page.html'>Register</a>";
                 }
             ?>
         </div>
