@@ -53,7 +53,10 @@
         <link href='https://fonts.googleapis.com/css?family=Nunito+Sans' rel='stylesheet'>
         <link rel="stylesheet" href="homepage.css"> 
         <link href='../NavigationBar/side-nav-ss.css' rel='stylesheet'>
-        
+
+        <link rel="stylesheet" href="../Footer/footer.css"> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <style>
             #mySidebar {
                 width: 300px;
@@ -62,10 +65,14 @@
             .c {
                 margin-left: 300px; /* Set initial margin to 0 */
             }
+           
+
+        
         </style>
     </head>
     <body>
         <?php  include('../NavigationBar/side-nav.php'); ?> 
+
         <div class="c">
         <!-- Button to open menu -->
         <div class="menu" onclick="openFilter()">&#9776;</div>
@@ -129,8 +136,14 @@
                 document.getElementsByClassName("c")[0].style.marginLeft = "0";
             }
         </script>
-      
 
+        <div class="spacer"> </div>
+
+        <!-- Footer Section -->
+        <footer>
+          <?php  include('../Footer/Footer.html'); ?> 
+        </footer>
+       
     </body>
-
+   
 </html>

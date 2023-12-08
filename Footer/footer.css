@@ -1,0 +1,107 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito Sans-Bold', Helvetica;
+    box-sizing: border-box;
+   
+}
+
+.footer{
+    bottom: 0px;
+    margin-top: 70%;
+    width:100%;
+    padding: 100px 15%;
+    background: black;
+    color: #fff;
+    display: flex; 
+   
+
+}
+
+.footer div{
+    text-align:center;
+}
+
+.col-2{
+    flex-grow: 2;
+}
+
+.footer div h3{
+    font-weight: 300;
+    margin-bottom:30px;
+    letter-spacing: 1px;
+}
+
+.col-1 a{
+    display:block;
+    text-decoration: none;
+    color:  #fff;
+    margin-bottom: 10px;
+}
+.col-1 a:hover{
+    color: #FFCB05;
+}
+
+form input{
+    width: 400px;
+    height:45px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    outline: none;
+    border: none;
+}
+
+form button{
+    background-color: #FFCB05;
+    border: 2px solid #00274C;
+    color: #00274C;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+form button:hover{
+    opacity: 0.8;
+}
+
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 18px;
+
+    border-radius: 50%;
+
+}
+.socials a i{
+    font-size: 1.7rem;
+    width: 20px;
+
+    transition: color .4s ease;
+
+}
+.socials a:hover i{
+    color: #FFCB05;
+}
+
+.footer-bottom{
+    background: #000;
+    width: 100vw;
+    padding: 30px;
+    padding-bottom: 40px;
+    text-align: center;
+}

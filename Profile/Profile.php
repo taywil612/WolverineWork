@@ -13,6 +13,12 @@
     <link href='https://fonts.googleapis.com/css?family=Nunito+Sans' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
     <link href='../NavigationBar/side-nav-ss.css' rel='stylesheet'>
+
+    <!-- For space between content and footer -->
+    <link rel="stylesheet" href="homepage.css"> 
+    <link rel="stylesheet" href="../Footer/footer.css"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         #mySidebar {
             width: 0;
@@ -150,6 +156,18 @@
         </div>
     </div>
 
+    <div class="spacer"> </div>
+
+     <!-- Footer Section -->
+     <footer>
+        <style>
+            .footer{
+                margin-top: 10%;
+            }
+        </style>
+        <?php  include('../Footer/Footer.html'); ?> 
+    </footer>
+    
     <script>
         // JS functions to open and close the sidebar
         function openFilter() {
