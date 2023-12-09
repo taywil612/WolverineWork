@@ -4,8 +4,6 @@ session_start();
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-
-
 $DATABASE_NAME = 'wolverinework';
 
 // Try and connect using the info above.

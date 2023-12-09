@@ -24,13 +24,13 @@
         .profile-card {
             width: 30%;
             padding: 20px;
-            display: flex;
+            display: inline-block;
             flex-direction: column;
         }
 
         .profile-picture {
-            width: 200px;
-            height: 200px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             background-color: #ccc;
             background-size: cover;
@@ -60,6 +60,11 @@
         .contacts {
             margin-top: 20px;
             font-size: 16px;
+        }
+
+        .contacts p{
+           
+            white-space:pre
         }
 
         .about-me textarea,
@@ -182,6 +187,22 @@
             font-size: 15px;
         }
 
+        .input-button{
+            width: 180px;
+            height: 40px;
+            background-color:#FFCB05;
+            font-family: 'Nunito Sans-Bold', Helvetica;
+            color: #00274C;
+            border-radius: 30px;
+            padding: 10px 30px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .input-button:hover {
+            opacity: 0.8;
+        }
+
         .custom-file-input {
             display: none;
         }
@@ -217,8 +238,10 @@
 
         
 .name-editable {
-    font-size: 18px; /* Adjust the font size as needed */
+    font-size: 25px; /* Adjust the font size as needed */
     color: inherit; /* Inherit color from the parent element (rest of the webpage) */
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 .menu {

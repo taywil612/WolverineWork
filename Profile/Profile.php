@@ -1,8 +1,26 @@
 <?php
     session_start();
 
-    $username = isset($_GET['username']) ? $_GET['username'] : '';
+    // Connect to the database
+    include('../database/connection.php');
 
+    // Check if logged in 
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../homepage/error-page.html");
+        exit();
+    }
+
+    $username = isset($_GET['username']) ? $_GET['username'] : '';
+  
+    //Get about me content
+    $getAboutMe= "SELECT about_me FROM account WHERE username='$username'";
+    $result = $conn->query($getAboutMe);
+    $about_me = $result->fetch_column();
+
+    //Get contact me content
+    $getContactMe= "SELECT contact_me FROM account WHERE username='$username'";
+    $result = $conn->query($getContactMe);
+    $contact_me = $result->fetch_column();
 
 ?>
 <!DOCTYPE html>
@@ -28,12 +46,15 @@
             margin-left: 0; /* Set initial margin to 0 */
         }
     </style>
+
+   
 </head>
-<body>
+<body >
     <?php  include('../NavigationBar/side-nav.php'); ?> 
     <div class="c">
         <div class="container">
                 <div class="menu" onclick="openFilter()">☰</div>
+                
                 <div class="profile-card">
                 <div class="profile-picture">
                     <input type="file" id="profile-image-input" class="custom-file-input" accept="image/*">
@@ -42,17 +63,80 @@
                     </label>
                     <img id="profile-image-preview" src="placeholder.jpg" alt="Profile Picture">
                 </div>
+    
+
+                <!-- Name Section -->
                 <div class="name-section">
-                    <h3 class="name-editable" onclick="enableNameEdit(this)"><span class="name-text">John Doe</span></h3>
+                    <!-- Display Username -->
+                    <h3 class="name-editable"><span class="name-text"><?=$username?></span></h3>
+
                 </div>
+
+                <div class="spacer"> </div>
+
+
+                <!-- About Me Section -->
                 <div class="about-me">
-                    <h3>About Me</h3>
-                    <textarea id="about-me-input" rows="4" placeholder="Write something about yourself..."></textarea>
+                    <h3>About Me</h3><br>
+                    <pre><p><?=$about_me?></p></pre>
+
+                    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+                        <textarea id="about-me-input" rows="4" name="about_me_text" placeholder= "Write something about yourself.."></textarea>
+                        <input class="input-button" type="submit" value="Save My Edits" name="about_me_button">  
+                    </form>    
                 </div>
+                
+                <?php
+                   if(isset($_POST['about_me_button']))
+                   {   
+                       // refresh current page to update info
+                       header("location:../Profile/Profile.php?username=" . $_SESSION['name'] .""); 
+                    
+                       $textareaValue = trim($_POST['about_me_text']);
+
+                       $username = ($_SESSION['name']);
+                       $sql = "UPDATE account SET about_me = '$textareaValue' WHERE username= '$username'";
+                       
+                       // Prepare statement
+                       $stmt = $conn->prepare($sql);
+                        // execute the query
+                       $stmt->execute();
+                       $stmt->close();
+                   }
+                ?>
+
+                <!-- Contact Me Section -->
                 <div class="contacts">
-                    <h3>Contact Me</h3>
-                    <textarea id="contacts-input" rows="4" placeholder="Add your contact information..."></textarea>
+                    <h3>Contact Me</h3><br>
+                    <pre><p><?=$contact_me?></p></pre>
+
+                    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+                        <textarea id="contacts-input" rows="4" name="contact_me_text" placeholder="Add your contact information..."></textarea>
+                        <input class="input-button" type="submit" value="Save My Edits" name="contact_me_button"> 
+                    </form>    
                 </div>
+
+                <?php
+                   if(isset($_POST['contact_me_button']))
+                   {   
+                       // refresh current page to update info
+                       header("location:../Profile/Profile.php?username=" . $_SESSION['name'] .""); 
+                    
+                       $textareaValue = trim($_POST['contact_me_text']);
+
+                       $username = ($_SESSION['name']);
+                       $sql = "UPDATE account SET contact_me = '$textareaValue' WHERE username= '$username'";
+                       
+                       // Prepare statement
+                       $stmt = $conn->prepare($sql);
+                        // execute the query
+                       $stmt->execute();
+                       $stmt->close();
+                   }
+                ?>
+
+
+
             </div>
 
             <div class="posts">
@@ -158,8 +242,8 @@
 
     <div class="spacer"> </div>
 
-     <!-- Footer Section -->
-     <footer>
+    <!-- Footer Section -->
+    <footer>
         <style>
             .footer{
                 margin-top: 10%;
@@ -179,10 +263,15 @@
             document.getElementById("mySidebar").style.width = "0";
             document.getElementsByClassName("c")[0].style.marginLeft = "0";
         }
+
+
         const profileImageInput = document.getElementById("profile-image-input");
         const profileImagePreview = document.getElementById("profile-image-preview");
+
+
         const nameSection = document.querySelector(".name-section");
         const nameText = document.querySelector(".name-text");
+
         const aboutMeInput = document.getElementById("about-me-input");
         const contactsInput = document.getElementById("contacts-input");
     
@@ -197,35 +286,37 @@
             }
         });
     
+       
         
         function enableNameEdit(element) {
-        const nameEditable = document.createElement("input");
-        nameEditable.type = "text";
-        nameEditable.value = nameText.innerText;
-        nameEditable.className = "name-edit";
-        nameEditable.addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                disableNameEdit(element, nameEditable.value);
-            }
-        });
+            const nameEditable = document.createElement("input");
+            nameEditable.type = "text";
+            nameEditable.value = nameText.innerText;
+            nameEditable.className = "name-edit";
+            nameEditable.addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    disableNameEdit(element, nameEditable.value);
+                }
+            });
 
-        element.innerHTML = ""; // Clear the content
-        element.appendChild(nameEditable);
-        nameEditable.focus();
-        nameEditable.select(); // Select the text in the input field for easy editing
+            element.innerHTML = ""; // Clear the content
+            element.appendChild(nameEditable);
+            nameEditable.focus();
+            nameEditable.select(); // Select the text in the input field for easy editing
+
         }
 
         function disableNameEdit(element, newName) {
-        const newNameText = document.createTextNode(newName);
-        element.innerHTML = ""; // Clear the content
-        const newH3 = document.createElement("h3");
-        newH3.className = "name-editable";
-        newH3.onclick = function () {
-            enableNameEdit(this);
-        };
-        newH3.appendChild(newNameText);
-        element.replaceWith(newH3);
-    }
+            const newNameText = document.createTextNode(newName);
+            element.innerHTML = ""; // Clear the content
+            const newH3 = document.createElement("h3");
+            newH3.className = "name-editable";
+            newH3.onclick = function () {
+                enableNameEdit(this);
+            };
+            newH3.appendChild(newNameText);
+            element.replaceWith(newH3);
+        }
     
         document.addEventListener("click", function (event) {
             const nameEditable = document.querySelector(".name-edit");
@@ -239,19 +330,21 @@
         };
     
 
+
         const likedPosts = new Set(); // Set to store liked posts
 
         function increaseLike(button) {
-        if (!likedPosts.has(button)) {
-        const counter = button.nextElementSibling;
-        let currentLikes = parseInt(counter.innerText);
-        counter.innerText = currentLikes + 1;
-        likedPosts.add(button);
+            if (!likedPosts.has(button)) {
+            const counter = button.nextElementSibling;
+            let currentLikes = parseInt(counter.innerText);
+            counter.innerText = currentLikes + 1;
+            likedPosts.add(button);
 
-        // Toggle the red class for the heart icon
-        button.classList.toggle("red");
-    }
-}
+            // Toggle the red class for the heart icon
+            button.classList.toggle("red");
+            }   
+        }
+
     </script>
     
 </body>
