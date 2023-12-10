@@ -40,6 +40,17 @@
         // Fetch recent posts
         $recentPosts = getRecentPosts($offset, $postsPerPage);
 
+        //Function to get the like count per post
+        function getLikeCount($post_id){
+            global $conn;
+            $query = "SELECT count(*) FROM likes WHERE post_id = $post_id";
+            $result = mysqli_query($conn, $query);
+            $likeCount = $result->fetch_column(); 
+
+            return $likeCount;
+        }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +65,7 @@
         <link rel="stylesheet" href="homepage.css"> 
         <link href='../NavigationBar/side-nav-ss.css' rel='stylesheet'>
 
+     
         <link rel="stylesheet" href="../Footer/footer.css"> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -106,9 +118,27 @@
                         <a href="../uploads/<?= $filePreview ?>" target="_blank">Click here to read the document!</a>
                     </div>
                 <?php endif; ?>
+                
+                <!-- Like Button -->
+                <style>
+                  .like-counter {
+                        margin-left: 5px;
+                        font-size: 20px; /* Adjust the font size as needed */
+                        color: #00274C; /* Optional: Customize the color */
+                    }
 
-                <div class="like-button">&#x2665; 5</div>
+                    .like-container {
+                        display: flex;
+                        align-items: center;
+                    }
+                </style>
+                <div class="like-container">
+                    <div class="like-button" type="button" onclick="increaseLike(this)">&#x2665;</div>
+                    <span class="like-counter"><?=getLikeCount($post['post_id'])?></span>
+                </div>
+
             </div>
+            
         <?php endforeach; ?>
 
         <!-- "See More" button -->
@@ -117,14 +147,23 @@
         </div>
 
         <script>
-            const likeButtons = document.querySelectorAll(".like-button");
-            likeButtons.forEach(button => {
-                button.addEventListener("click", function () {
-                    button.classList.toggle("red");
-                });
 
-            });
-
+            //Function for increasing likes (from profile page)
+            const likedPosts = new Set(); // Set to store liked posts
+            
+            function increaseLike(button) {
+                if (!likedPosts.has(button)) {
+                const counter = button.nextElementSibling;
+                let currentLikes = parseInt(counter.innerText);
+                counter.innerText = currentLikes + 1;
+                likedPosts.add(button);
+                
+                // Toggle the red class for the heart icon
+                button.classList.toggle("red");
+                }   
+    
+            }
+           
             // JS functions to open and close the sidebar
             function openFilter() {
                 document.getElementById("mySidebar").style.width = "300px";
@@ -135,6 +174,7 @@
                 document.getElementById("mySidebar").style.width = "0";
                 document.getElementsByClassName("c")[0].style.marginLeft = "0";
             }
+
         </script>
 
         <div class="spacer"> </div>

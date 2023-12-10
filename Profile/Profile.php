@@ -339,7 +339,7 @@
             let currentLikes = parseInt(counter.innerText);
             counter.innerText = currentLikes + 1;
             likedPosts.add(button);
-
+            
             // Toggle the red class for the heart icon
             button.classList.toggle("red");
             }   
