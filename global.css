@@ -259,20 +259,21 @@ LOGIN PAGE CSS
     line-height: 18.2px;
     position: absolute;
     text-align: center;
-    top: 460px;
+    top: 450px;
     white-space: nowrap;
     width: 169px;
   }
 
  
   .login-page .dont-have-an-account-sign-up-today:hover {
-    color:#00274c;
+    color:#FFCB05;
+    background-color: #00274c;
   }
   
   .login-page .dont-have-an-account-sign-up-today {
     color: var(--pale-sky);
     font-family: var(--font-family-nunito_sans);
-    font-size: var(--font-size-xxs);
+    font-size: var(--font-size-xs);
     font-weight: 400;
     height: 35px;
     left: 529px;

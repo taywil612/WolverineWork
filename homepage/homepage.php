@@ -4,6 +4,10 @@
         // Connect to the database
         include('../database/connection.php');
 
+        //PHP file for handling likes for the like buttons
+        include('like_handler.php');
+       
+
         // Function to fetch recent posts
         function getRecentPosts($offset, $limit) {
             global $conn;
@@ -40,17 +44,6 @@
         // Fetch recent posts
         $recentPosts = getRecentPosts($offset, $postsPerPage);
 
-        //Function to get the like count per post
-        function getLikeCount($post_id){
-            global $conn;
-            $query = "SELECT count(*) FROM likes WHERE post_id = $post_id";
-            $result = mysqli_query($conn, $query);
-            $likeCount = $result->fetch_column(); 
-
-            return $likeCount;
-        }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +58,7 @@
         <link rel="stylesheet" href="homepage.css"> 
         <link href='../NavigationBar/side-nav-ss.css' rel='stylesheet'>
 
-     
+        <!-- For Footer CSS -->
         <link rel="stylesheet" href="../Footer/footer.css"> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -77,10 +70,9 @@
             .c {
                 margin-left: 300px; /* Set initial margin to 0 */
             }
-           
-
         
         </style>
+
     </head>
     <body>
         <?php  include('../NavigationBar/side-nav.php'); ?> 
@@ -132,8 +124,9 @@
                         align-items: center;
                     }
                 </style>
+            
                 <div class="like-container">
-                    <div class="like-button" type="button" onclick="increaseLike(this)">&#x2665;</div>
+                    <div class="like-button" type="button" onclick="increaseLike(this, <?= $post['post_id'] ?>)">&#x2665;</div>
                     <span class="like-counter"><?=getLikeCount($post['post_id'])?></span>
                 </div>
 
@@ -148,20 +141,44 @@
 
         <script>
 
-            //Function for increasing likes (from profile page)
-            const likedPosts = new Set(); // Set to store liked posts
-            
-            function increaseLike(button) {
-                if (!likedPosts.has(button)) {
-                const counter = button.nextElementSibling;
-                let currentLikes = parseInt(counter.innerText);
-                counter.innerText = currentLikes + 1;
-                likedPosts.add(button);
-                
-                // Toggle the red class for the heart icon
-                button.classList.toggle("red");
-                }   
-    
+            //Function to have the likes increase in value everytime the like button is pressed (and store in database)
+            const likedPosts = new Set(JSON.parse(localStorage.getItem('likedPosts')) || []);
+
+            function increaseLike(button, post_id) {
+                // Check if the post_id is already liked
+                if (!likedPosts.has(post_id)) {
+                    const counter = button.nextElementSibling;
+                    let currentLikes = parseInt(counter.innerText);
+                    counter.innerText = currentLikes + 1;
+                    likedPosts.add(post_id);
+
+                    // Toggle the red class for the heart icon
+                    button.classList.toggle("red");
+
+                    // Store updated likedPosts in localStorage
+                    localStorage.setItem('likedPosts', JSON.stringify(Array.from(likedPosts)));
+
+                    // Send an AJAX request to insert the like into the database
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'like_handler.php', true);
+                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            // Like successfully inserted into the database
+                            console.log(xhr.responseText);
+                        }
+                    };
+                    
+                    // Get the username from the session
+                    const username = "<?php echo $_SESSION['name']; ?>";
+                    // Send the post_id and username to the server
+                    xhr.send('post_id=' + post_id + '&username=' + username);
+                    
+                }
+                else {
+                    // The post is already liked, keep the button red
+                    button.classList.add("red");
+                }
             }
            
             // JS functions to open and close the sidebar
