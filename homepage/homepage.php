@@ -86,7 +86,7 @@
                 <!-- Display post details -->
                 <div class= "profile">
                     <div class= "profile-img">
-                        <img id="profile-image-preview" src="../img/avatarPic2.png" alt="Profile Picture">
+                        <img id="profile-image-preview" src="../Profile/profilepic.png" alt="Profile Picture">
                     </div>
                 </div>
 

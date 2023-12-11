@@ -4,6 +4,10 @@
     // Connect to the database
     include('../database/connection.php');
 
+    //PHP file for handling likes for the like buttons
+    include('../homepage/like_handler.php');
+       
+
     // Check if logged in 
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../homepage/error-page.html");
@@ -22,6 +26,15 @@
     $result = $conn->query($getContactMe);
     $contact_me = $result->fetch_column();
 
+    /*
+    // Function to get like count for a post
+    function getLikeCount($post_id, $conn) {
+        $getLikes = "SELECT COUNT(*) as like_count FROM likes WHERE post_id=$post_id";
+        $result = $conn->query($getLikes);
+        $row = $result->fetch_assoc();
+        return $row['like_count'];
+    }
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,14 +69,9 @@
                 <div class="menu" onclick="openFilter()">☰</div>
                 
                 <div class="profile-card">
-                <div class="profile-picture">
-                    <input type="file" id="profile-image-input" class="custom-file-input" accept="image/*">
-                    <label for="profile-image-input" class="custom-file-label">
-                        <span class="custom-file-label-text">Change Profile Picture</span>
-                    </label>
-                    <img id="profile-image-preview" src="placeholder.jpg" alt="Profile Picture">
+                <div class='profile-picture'>
+                    <img src='../Profile/profilepic.png' alt='Profile Picture' id='profile-picture'>
                 </div>
-    
 
                 <!-- Name Section -->
                 <div class="name-section">
@@ -73,7 +81,6 @@
                 </div>
 
                 <div class="spacer"> </div>
-
 
                 <!-- About Me Section -->
                 <div class="about-me">
@@ -134,9 +141,6 @@
                        $stmt->close();
                    }
                 ?>
-
-
-
             </div>
 
             <div class="posts">
@@ -144,97 +148,32 @@
                     <h3>Posts</h3>
                 </div>
                 <div class="posts-content">
-                    <!-- Placeholder posts with like, comments, and edit buttons -->
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
-                    <div class="post">
-                        <img src="placeholder.jpg" alt="Post">
-                        <div class="post-actions">
-                            <div class="like-container">
-                                <div class="like-button" onclick="increaseLike(this)">&#x2665;</div>
-                                <span class="like-counter">0</span>
-                            </div>
-                            <div class="edit-button">✏️</div>
-                        </div>
-                    </div>
+                <?php
+                    $getPosts = "SELECT * FROM post WHERE username='$username' ORDER BY created_at DESC";
+                    $resultPosts = $conn->query($getPosts);
+
+                while ($row = $resultPosts->fetch_assoc()) {
+                    $postId = $row['post_id'];
+                    $title = $row['title'];
+                    $caption = $row['caption'];
+
+                    echo "<div class='post'>";
+                    echo "<div class='post-details'>";
+                    echo "<h4>$title</h4>";
+                    echo "<p>$caption</p>";
+                    echo "</div>";                   
+                    echo "<div class='post-actions'>";
+
+                    
+                    echo "<div class='like-container'>";
+                    echo "<div class='like-button' onclick='increaseLike(this, $postId)'>&#x2665;</div>";
+                    echo "<span class='like-counter'>" . getLikeCount($postId) . "</span>";
+                    echo "</div>";
+                    echo "<div class='edit-button'>✏️</div>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+                ?>
                 </div>
             </div>
         </div>
@@ -264,9 +203,20 @@
             document.getElementsByClassName("c")[0].style.marginLeft = "0";
         }
 
+        // Set a fixed height for all posts
+        function setFixedPostHeight() {
+            const posts = document.querySelectorAll('.post');
 
-        const profileImageInput = document.getElementById("profile-image-input");
-        const profileImagePreview = document.getElementById("profile-image-preview");
+            posts.forEach(post => {
+                post.style.height = '350px'; // Adjust the height as needed
+            });
+        }
+
+        // Call the function once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', setFixedPostHeight);
+
+        // Call the function again if the window is resized
+        window.addEventListener('resize', setFixedPostHeight);
 
 
         const nameSection = document.querySelector(".name-section");
@@ -274,20 +224,7 @@
 
         const aboutMeInput = document.getElementById("about-me-input");
         const contactsInput = document.getElementById("contacts-input");
-    
-        profileImageInput.addEventListener("change", function () {
-            const file = profileImageInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    profileImagePreview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    
-       
-        
+
         function enableNameEdit(element) {
             const nameEditable = document.createElement("input");
             nameEditable.type = "text";
@@ -328,23 +265,47 @@
         nameSection.onclick = function () {
             enableNameEdit(this);
         };
-    
 
+        //Updated Increase Like function (same as home page)
+        const likedPosts = new Set(JSON.parse(localStorage.getItem('likedPosts')) || []);
 
-        const likedPosts = new Set(); // Set to store liked posts
+        function increaseLike(button, post_id) {
+            // Check if the post_id is already liked
+            if (!likedPosts.has(post_id)) {
+                const counter = button.nextElementSibling;
+                let currentLikes = parseInt(counter.innerText);
+                counter.innerText = currentLikes + 1;
+                likedPosts.add(post_id);
 
-        function increaseLike(button) {
-            if (!likedPosts.has(button)) {
-            const counter = button.nextElementSibling;
-            let currentLikes = parseInt(counter.innerText);
-            counter.innerText = currentLikes + 1;
-            likedPosts.add(button);
-            
-            // Toggle the red class for the heart icon
-            button.classList.toggle("red");
-            }   
+                // Toggle the red class for the heart icon
+                button.classList.toggle("red");
+
+                // Store updated likedPosts in localStorage
+                localStorage.setItem('likedPosts', JSON.stringify(Array.from(likedPosts)));
+
+                // Send an AJAX request to insert the like into the database
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'like_handler.php', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Like successfully inserted into the database
+                        console.log(xhr.responseText);
+                    }
+                };
+                
+                // Get the username from the session
+                const username = "<?php echo $_SESSION['name']; ?>";
+                // Send the post_id and username to the server
+                xhr.send('post_id=' + post_id + '&username=' + username);
+                
+            }
+            else {
+                // The post is already liked, keep the button red
+                button.classList.add("red");
+            }
         }
-
+        
     </script>
     
 </body>

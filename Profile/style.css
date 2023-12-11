@@ -80,17 +80,6 @@
             font-size: 15px;
         }
 
-        .posts {
-            flex-grow: 1;
-            padding: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
         .posts-title {
             background-color: #FFCB05;
             color: #00274C;
@@ -103,35 +92,33 @@
 
         .posts-content {
             flex-grow: 1;
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             justify-content: space-between;
             overflow: auto;
         }
 
         .post {
-            width: calc(33.333% - 20px);
-            padding-bottom: calc(33.333% - 20px);
             background-color: #ccc;
             border-radius: 10px;
-            position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        .post img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .post-details {
+            padding: 15px;
+            flex-grow: 1; /* Allow post details to grow within the post */
+            max-height: 100%;
+            overflow: auto;
+        }
+
+        .post h4 {
+            margin-bottom: 10px;
         }
 
         .post-actions {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -139,7 +126,7 @@
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 0 0 10px 10px;
         }
-        
+
         .like-container {
             display: flex;
             align-items: center;
@@ -247,3 +234,4 @@
 .menu {
     color: #00274C !important;
 }
+
