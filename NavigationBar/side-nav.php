@@ -8,7 +8,7 @@
         </a>
         <br><br><br>
         <div class="side-bar-buttons">
-            <a class="nav" href='search'>Search</a>
+            <a class="nav" href='../Search/search.php'>Search</a>
             <?php
                 // Check if the user logged in
                 if (isset($_SESSION['loggedin'])) {
