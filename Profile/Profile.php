@@ -6,15 +6,12 @@
 
     //PHP file for handling likes for the like buttons
     include('../homepage/like_handler.php');
-       
-
-    // Check if logged in 
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../homepage/error-page.html");
-        exit();
-    }
+    
 
     $username = isset($_GET['username']) ? $_GET['username'] : '';
+
+    // see if user owns profile
+    $isOwner = isset($_SESSION['name']) && $_SESSION['name'] === $username;
   
     //Get about me content
     $getAboutMe= "SELECT about_me FROM account WHERE username='$username'";
@@ -25,6 +22,16 @@
     $getContactMe= "SELECT contact_me FROM account WHERE username='$username'";
     $result = $conn->query($getContactMe);
     $contact_me = $result->fetch_column();
+
+    //Get link to view files
+    function getFilePreview($post_Id) {
+        global $conn;
+        $query = "SELECT file_name FROM files WHERE post_id = $post_Id LIMIT 1";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+
+        return isset($row['file_name']) ? $row['file_name'] : null;
+    }
 
     /*
     // Function to get like count for a post
@@ -52,11 +59,11 @@
 
     <style>
         #mySidebar {
-            width: 0;
+            width: 0px;
         }
 
         .c {
-            margin-left: 0; /* Set initial margin to 0 */
+            margin-left: 0px; /* Set initial margin to 0 */
         }
     </style>
 
@@ -82,17 +89,23 @@
 
                 <div class="spacer"> </div>
 
-                <!-- About Me Section -->
-                <div class="about-me">
-                    <h3>About Me</h3><br>
-                    <pre><p><?=$about_me?></p></pre>
-
-                    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-                        <textarea id="about-me-input" rows="4" name="about_me_text" placeholder= "Write something about yourself.."></textarea>
-                        <input class="input-button" type="submit" value="Save My Edits" name="about_me_button">  
-                    </form>    
-                </div>
-                
+                <?php if ($isOwner): ?>
+                    <div class="about-me">
+                        <h3>About Me</h3><br>
+                        <pre><p><?=$about_me?></p></pre>
+                        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+                            <textarea id="about-me-input" rows="4" name="about_me_text" placeholder="Write something about yourself.."></textarea>
+                            <input class="input-button" type="submit" value="Save My Edits" name="about_me_button">  
+                        </form>    
+                    </div>
+                <?php endif; ?>
+                <?php if (!$isOwner):?>
+                    <div class="about-me">
+                        <h3>About Me</h3><br>
+                        <pre><p><?=$about_me?></p></pre>
+                    </div>
+                <?php endif; ?>
+                    
                 <?php
                    if(isset($_POST['about_me_button']))
                    {   
@@ -113,15 +126,22 @@
                 ?>
 
                 <!-- Contact Me Section -->
-                <div class="contacts">
-                    <h3>Contact Me</h3><br>
-                    <pre><p><?=$contact_me?></p></pre>
-
-                    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-                        <textarea id="contacts-input" rows="4" name="contact_me_text" placeholder="Add your contact information..."></textarea>
-                        <input class="input-button" type="submit" value="Save My Edits" name="contact_me_button"> 
-                    </form>    
-                </div>
+                <?php if ($isOwner): ?>
+                    <div class="contacts">
+                        <h3>Contact Me</h3><br>
+                        <pre><p><?=$contact_me?></p></pre>
+                        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+                            <textarea id="contacts-input" rows="4" name="contact_me_text" placeholder="Add your contact information..."></textarea>
+                            <input class="input-button" type="submit" value="Save My Edits" name="contact_me_button"> 
+                        </form>    
+                    </div>
+                <?php endif; ?>
+                <?php if (!$isOwner):?>
+                    <div class="contacts">
+                        <h3>Contact Me</h3><br>
+                        <pre><p><?=$contact_me?></p></pre>
+                    </div>
+                <?php endif; ?>
 
                 <?php
                    if(isset($_POST['contact_me_button']))
@@ -148,32 +168,39 @@
                     <h3>Posts</h3>
                 </div>
                 <div class="posts-content">
-                <?php
-                    $getPosts = "SELECT * FROM post WHERE username='$username' ORDER BY created_at DESC";
-                    $resultPosts = $conn->query($getPosts);
+                    <?php
+                        $getPosts = "SELECT * FROM post WHERE username='$username' ORDER BY created_at DESC";
+                        $resultPosts = $conn->query($getPosts);
 
-                while ($row = $resultPosts->fetch_assoc()) {
-                    $postId = $row['post_id'];
-                    $title = $row['title'];
-                    $caption = $row['caption'];
+                    while ($row = $resultPosts->fetch_assoc()) {
+                        $postId = $row['post_id'];
+                        $title = $row['title'];
+                        $caption = $row['caption'];
 
-                    echo "<div class='post'>";
-                    echo "<div class='post-details'>";
-                    echo "<h4>$title</h4>";
-                    echo "<p>$caption</p>";
-                    echo "</div>";                   
-                    echo "<div class='post-actions'>";
+                        echo "<div class='post'>";
+                        echo "<div class='post-details'>";
+                        echo "<h4>";
+                        $filePreview = getFilePreview($postId);
+                        if ($filePreview) : ?>
+                            <div class="file-preview">
+                                <a href="../uploads/<?= $filePreview ?>" target="_blank"> <?php echo $title ?></a>
+                            </div>
+                        <?php endif;
+                        echo "</h4>";
+                        echo "<p>$caption</p>";
+                        echo "</div>";                   
+                        echo "<div class='post-actions'>";
 
-                    
-                    echo "<div class='like-container'>";
-                    echo "<div class='like-button' onclick='increaseLike(this, $postId)'>&#x2665;</div>";
-                    echo "<span class='like-counter'>" . getLikeCount($postId) . "</span>";
-                    echo "</div>";
-                    echo "<div class='edit-button'>✏️</div>";
-                    echo "</div>";
-                    echo "</div>";
-                }
-                ?>
+                        
+                        echo "<div class='like-container'>";
+                        echo "<div class='like-button' onclick='increaseLike(this, $postId)'>&#x2665;</div>";
+                        echo "<span class='like-counter'>" . getLikeCount($postId) . "</span>";
+                        echo "</div>";
+                        echo "<div class='edit-button'>✏️</div>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -202,6 +229,9 @@
             document.getElementById("mySidebar").style.width = "0";
             document.getElementsByClassName("c")[0].style.marginLeft = "0";
         }
+    </script>
+
+    <script>
 
         // Set a fixed height for all posts
         function setFixedPostHeight() {

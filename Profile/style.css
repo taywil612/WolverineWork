@@ -235,3 +235,13 @@
     color: #00274C !important;
 }
 
+.file-preview a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.file-preview a:hover {
+    text-decoration: none;
+    color: #FFCB05;
+}

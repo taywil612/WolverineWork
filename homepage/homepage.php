@@ -181,6 +181,9 @@
                 }
             }
            
+        </script>
+
+        <script>
             // JS functions to open and close the sidebar
             function openFilter() {
                 document.getElementById("mySidebar").style.width = "300px";
